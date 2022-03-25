@@ -1,18 +1,39 @@
+import React, { useState } from "react";
+import Video from "./src/Video.js"
+import VideoDetails from "./src/VideoDetails"
+import CommentListItem from "./src/CommentListItem.js";
+import Likes from "./src/Likes.js"
+
 import video from "../data/video.js";
 
 function App() {
   console.log("Here's your data:", video);
 
+  const [showComments, setShowComments] = useState(true)
+
+	const vanishComments = () => {
+		setShowComments( !showComments )
+	}
+
   return (
     <div className="App">
-      <iframe
-        width="919"
-        height="525"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        frameBorder="0"
-        allowFullScreen
-        title="Thinking in React"
+      <Video 
+      embedUrl={video.embedUrl} 
+      title={video.title}
       />
+      <VideoDetails video={video}/>
+      <Likes upvotes={video.upvotes} downvotes={video.downvotes}/>
+      <CommentListItem comments={video.comments}/>
+      <button onClick={vanishComments}>
+				{showComments ? "Hide" : "Show"} Comments
+			</button>
+
+			<hr/>
+
+			{ showComments ? 
+				<CommentListItem comments={video.comments}/> :
+				null
+			}
     </div>
   );
 }
