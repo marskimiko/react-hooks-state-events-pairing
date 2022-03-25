@@ -23,7 +23,6 @@ function App() {
       />
       <VideoDetails video={video}/>
       <Likes upvotes={video.upvotes} downvotes={video.downvotes}/>
-      <CommentListItem comments={video.comments}/>
       <button onClick={vanishComments}>
 				{showComments ? "Hide" : "Show"} Comments
 			</button>
